@@ -37,10 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02BC9E6E7DFC001542BCA307 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		02BC9E6E7DFC001542BCA307 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1678414BE33674A6D7687F43 /* Pods-AllPod_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllPod_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AllPod_Tests/Pods-AllPod_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		1FDE65C22C3DDA4EF1E751A0 /* Pods_AllPod_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllPod_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4806A6103BAA2235A8B264C3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4806A6103BAA2235A8B264C3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* AllPod_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllPod_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -64,7 +64,7 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8AE089475FBE7E09B6440070 /* Pods-AllPod_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllPod_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AllPod_Tests/Pods-AllPod_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A5219DFCBE50573B8FD15573 /* AllPod.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = AllPod.podspec; path = ../AllPod.podspec; sourceTree = "<group>"; };
+		A5219DFCBE50573B8FD15573 /* AllPod.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AllPod.podspec; path = ../AllPod.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B33E1D49641B3CE6CA63B9AD /* Pods_AllPod_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllPod_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B60FAB47CF31F28F180365 /* Pods-AllPod_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllPod_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AllPod_Example/Pods-AllPod_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -301,11 +301,25 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AllPod_Example/Pods-AllPod_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/AVHexColor/AVHexColor.framework",
 				"${BUILT_PRODUCTS_DIR}/AllPod/AllPod.framework",
+				"${BUILT_PRODUCTS_DIR}/JSONKit-NoWarning/JSONKit_NoWarning.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast/Toast.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVHexColor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AllPod.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONKit_NoWarning.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

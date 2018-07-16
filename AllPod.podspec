@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+All common snippets for personal use
                        DESC
 
   s.homepage         = 'https://github.com/tthufo@gmail.com/AllPod'
@@ -28,15 +28,18 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/tthufo@gmail.com/AllPod.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+s.ios.deployment_target = '8.0'
 
-  s.source_files = 'AllPod/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'AllPod' => ['AllPod/Assets/*.png']
-  # }
+s.source_files = 'AllPod/Classes'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+s.public_header_files = 'AllPod/Classes/*.h'
+
+s.dependency 'SVProgressHUD'
+s.dependency 'Toast', '~> 4.0.0'
+s.dependency 'Reachability', '~> 3.2'
+s.dependency 'AFNetworking', '~> 3.1'
+s.dependency 'JSONKit-NoWarning', '~> 1.2'
+s.dependency 'SDWebImage', '~> 4.4'
+s.dependency 'AVHexColor', '~> 2.0'
+
 end

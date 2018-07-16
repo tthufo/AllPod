@@ -8,6 +8,8 @@
 
 #import "APViewController.h"
 
+#import "AllPlugInHeader.h"
+
 @interface APViewController ()
 
 @end
@@ -17,6 +19,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+//    [LTRequest sharedInstance]
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
