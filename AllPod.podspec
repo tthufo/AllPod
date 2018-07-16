@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AllPod'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A short description of AllPod.'
 
 # This description is used to generate tags and improve search results.
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 All common snippets for personal use
                        DESC
 
-  s.homepage         = 'https://github.com/tthufo@gmail.com/AllPod'
+  s.homepage         = 'https://github.com/tthufo/AllPod'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'tthufo@gmail.com' => 'tthufo' }
-  s.source           = { :git => 'https://github.com/tthufo@gmail.com/AllPod.git', :tag => s.version.to_s }
+  s.author           = { 'tthufo' => 'tthufo@gmail.com' }
+  s.source           = { :git => 'https://github.com/tthufo/AllPod.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 s.ios.deployment_target = '8.0'
