@@ -28,4 +28,8 @@
 
 #import "Permission.h"
 
+#import "UIButton+Badge.h"
+
+#import "UIBarButtonItem+Badge.h"
+
 //#endif /* FBPlugInHeader_h */

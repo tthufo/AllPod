@@ -1056,7 +1056,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 {
     if([shadowColor isEqualToString:@""])
     {
-        [self withShadow];
+        self.layer.shadowColor = UIColor.blackColor.CGColor;
+        self.layer.shadowOffset = CGSizeMake(1, 1);
+        self.layer.shadowOpacity = 0.2;
+        self.layer.shadowRadius = 2.0;
     }
     else
     {
