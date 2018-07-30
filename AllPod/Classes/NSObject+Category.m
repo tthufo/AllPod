@@ -1052,6 +1052,23 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     }
 }
 
+- (void)setFlex:(NSString *)flex
+{
+    if([flex isEqualToString:@""])
+    {
+        for (NSLayoutConstraint * constraint in self.constraints) {
+            if(constraint.firstAttribute == NSLayoutAttributeHeight){
+                constraint.constant = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11") ? 44 : 64 ;
+            }
+        }
+    }
+}
+
+- (NSString*)getFlex
+{
+    return self.flex;
+}
+
 - (void)setShadowColor:(NSString *)shadowColor
 {
     if([shadowColor isEqualToString:@""])

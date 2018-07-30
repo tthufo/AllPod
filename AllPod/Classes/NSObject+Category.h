@@ -211,6 +211,8 @@
 
 - (void)stopAllAnimations;
 
+@property(nonatomic, assign) NSString* flex;
+
 @property(nonatomic, assign) NSString* shadowColor;
 
 @end
