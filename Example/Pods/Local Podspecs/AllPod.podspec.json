@@ -1,19 +1,19 @@
 {
   "name": "AllPod",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "summary": "A short description of AllPod.",
   "description": "All common snippets for personal use",
-  "homepage": "https://github.com/tthufo@gmail.com/AllPod",
+  "homepage": "https://github.com/tthufo/AllPod",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "tthufo@gmail.com": "tthufo"
+    "tthufo": "tthufo@gmail.com"
   },
   "source": {
-    "git": "https://github.com/tthufo@gmail.com/AllPod.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/tthufo/AllPod.git",
+    "tag": "0.1.7"
   },
   "platforms": {
     "ios": "8.0"

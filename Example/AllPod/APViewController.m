@@ -28,6 +28,10 @@
     UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
     
     button.badgeValue = @"12";
+    
+//    [[Media shareInstance] startPickImageWithOption:NO andBase:nil andRoot:self andCompletion:^(id object) {
+//        
+//    }];
 }
 
 
