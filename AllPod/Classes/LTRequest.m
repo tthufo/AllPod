@@ -160,11 +160,11 @@ static LTRequest *__sharedLTRequest = nil;
     
     if(error)
     {
-        completion(nil, @"1", error, NO);
+        completion(nil, @"1", error, NO, nil);
     }
     else
     {
-        completion([NSString stringWithUTF8String:[htmlData bytes]], @"0", nil, YES);
+        completion([NSString stringWithUTF8String:[htmlData bytes]], @"0", nil, YES, nil);
         
         [self addValue:[NSString stringWithUTF8String:[htmlData bytes]] andKey:dict[@"absoluteLink"]];
     }
@@ -310,7 +310,12 @@ static LTRequest *__sharedLTRequest = nil;
             }
             else
             {
-                [self didSuccessResult:dict andResult:[responseObject objectFromJSONData] ? [responseObject objectFromJSONData] : [NSString stringWithUTF8String:[responseObject bytes]] andUrl:url andPostData:post andStatusCode:[NSString stringWithFormat:@"%ld",[(NSHTTPURLResponse*)task.response statusCode]]];
+                //                [self didSuccessResult:dict andResult:[responseObject objectFromJSONData] ? [responseObject objectFromJSONData] : [NSString stringWithUTF8String:[responseObject bytes]] andUrl:url andPostData:post andStatusCode:[NSString stringWithFormat:@"%ld",[(NSHTTPURLResponse*)task.response statusCode]]];
+                
+                [self didSuccessResult:dict andResult:[responseObject objectFromJSONData] ? [responseObject objectFromJSONData] : [NSString stringWithUTF8String:[responseObject bytes]] andUrl:url andPostData:post andStatusCode:task.response];
+                
+                NSLog(@"%@", ((NSHTTPURLResponse*)task.response).allHeaderFields);
+                
             }
             
         } failure:^(NSURLSessionTask *operation, NSError *error) {
@@ -363,7 +368,7 @@ static LTRequest *__sharedLTRequest = nil;
             }
             else
             {
-                [self didSuccessResult:dict andResult:[responseObject objectFromJSONData] ? [responseObject objectFromJSONData] : [NSString stringWithUTF8String:[responseObject bytes]] andUrl:url andPostData:post andStatusCode:[NSString stringWithFormat:@"%ld",[(NSHTTPURLResponse*)task.response statusCode]]];
+                [self didSuccessResult:dict andResult:[responseObject objectFromJSONData] ? [responseObject objectFromJSONData] : [NSString stringWithUTF8String:[responseObject bytes]] andUrl:url andPostData:post andStatusCode:task.response];
             }
             
         } failure:^(NSURLSessionTask *operation, NSError *error) {
@@ -386,7 +391,7 @@ static LTRequest *__sharedLTRequest = nil;
             [dict[@"host"] hideSVHUD];
         }
         
-        ((RequestCompletion)dict[@"completion"])(nil, @"404", error, NO);
+        ((RequestCompletion)dict[@"completion"])(nil, @"404", error, NO, nil);
     }
     else
     {
@@ -402,13 +407,15 @@ static LTRequest *__sharedLTRequest = nil;
             [result addEntriesFromDictionary:@{@"checkmark":dict[@"checkmark"]}];
         }
         
-        ((RequestCompletion)dict[@"completion"])(nil, statusCode, error, [self didRespond:result andHost:dict[@"host"]]);
+        ((RequestCompletion)dict[@"completion"])(nil, statusCode, error, [self didRespond:result andHost:dict[@"host"]], nil);
     }
 }
 
-- (void)didSuccessResult:(NSDictionary*)dict andResult:(id)response andUrl:(NSString*)url andPostData:(NSDictionary*)post andStatusCode:(NSString*)responseCode
+- (void)didSuccessResult:(NSDictionary*)dict andResult:(id)response andUrl:(NSString*)url andPostData:(NSDictionary*)post andStatusCode:(NSHTTPURLResponse *)header
 {
     NSDictionary * info = [self dictWithPlist:@"Info"];
+    
+    NSString * responseCode = [NSString stringWithFormat:@"%ld",(long)[header statusCode]];
     
     NSMutableDictionary * result = [response isKindOfClass:[NSDictionary class]] ? [NSMutableDictionary dictionaryWithDictionary:response] : [response isKindOfClass:[NSArray class]] ? [NSMutableDictionary dictionaryWithDictionary:@{@"array":response}] : [NSMutableDictionary new];
     
@@ -447,7 +454,7 @@ static LTRequest *__sharedLTRequest = nil;
         [self showToast:@"Check for Plist/eCode" andPos:0];
     }
     
-    ((RequestCompletion)dict[@"completion"])([response isKindOfClass:[NSDictionary class]] ? [response bv_jsonStringWithPrettyPrint:NO] : [response isKindOfClass:[NSArray class]] ? [@{@"array":response} bv_jsonStringWithPrettyPrint:NO] : response, [result responseForKey:[info responseForKey:@"eCode"] ? info[@"eCode"] : @"ERR_CODE"] ? [result getValueFromKey:[info responseForKey:@"eCode"] ? info[@"eCode"] : @"ERR_CODE"] : responseCode, nil,[dict responseForKey:@"overrideError"] ? YES : [self didRespond:result andHost:dict[@"host"]]);
+    ((RequestCompletion)dict[@"completion"])([response isKindOfClass:[NSDictionary class]] ? [response bv_jsonStringWithPrettyPrint:NO] : [response isKindOfClass:[NSArray class]] ? [@{@"array":response} bv_jsonStringWithPrettyPrint:NO] : response, [result responseForKey:[info responseForKey:@"eCode"] ? info[@"eCode"] : @"ERR_CODE"] ? [result getValueFromKey:[info responseForKey:@"eCode"] ? info[@"eCode"] : @"ERR_CODE"] : responseCode, nil, [dict responseForKey:@"overrideError"] ? YES : [self didRespond:result andHost:dict[@"host"]], header.allHeaderFields);
 }
 
 - (NSString*)returnGetUrl:(NSDictionary*)dict
