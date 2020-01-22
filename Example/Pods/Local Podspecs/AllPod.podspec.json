@@ -1,6 +1,6 @@
 {
   "name": "AllPod",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "summary": "A short description of AllPod.",
   "description": "All common snippets for personal use",
   "homepage": "https://github.com/tthufo/AllPod",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/tthufo/AllPod.git",
-    "tag": "0.1.7"
+    "tag": "0.1.9"
   },
   "platforms": {
     "ios": "8.0"

@@ -175,6 +175,23 @@ static LTRequest *__sharedLTRequest = nil;
     }
 }
 
+- (void)didRequestMultiPart:(NSDictionary*)dict withCache:(RequestCache)cacheData andCompletion:(RequestCompletion)completion
+{
+    if(!self.address)
+    {
+        NSLog(@"Please setup request url in Plist");
+        
+        return ;
+    }
+    NSMutableDictionary * data = [dict mutableCopy];
+    
+    data[@"completion"] = completion;
+    
+    data[@"cache"] = cacheData;
+    
+    [self didRequestMultiPartData:data];
+}
+
 - (void)didRequestInfo:(NSDictionary*)dict withCache:(RequestCache)cacheData andCompletion:(RequestCompletion)completion
 {
     if(!self.address)
@@ -251,6 +268,91 @@ static LTRequest *__sharedLTRequest = nil;
     
     return NO;
 }
+
+- (void)didRequestMultiPartData:(NSMutableDictionary*)dict
+{
+    NSDictionary * info = [self dictWithPlist:@"Info"];
+    
+    NSMutableDictionary * post = nil;
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    if([dict responseForKey:@"header"])
+    {
+        for(NSString * key in dict[@"header"])
+        {
+            [manager.requestSerializer setValue:dict[@"header"][key] forHTTPHeaderField:key];
+        }
+    }
+    
+    NSString * url;
+    
+    url = [dict responseForKey:@"absoluteLink"] ? dict[@"absoluteLink"] : [dict responseForKey:@"postFix"] ? [NSString stringWithFormat:@"%@/%@",self.address,dict[@"postFix"]] : self.address;
+    
+    post = [[NSMutableDictionary alloc] initWithDictionary:dict];
+    
+    for(NSString * key in post.allKeys)
+    {
+        if([key isEqualToString:@"host"] || [key isEqualToString:@"completion"] || [key isEqualToString:@"method"] || [key isEqualToString:@"checkmark"] || [key isEqualToString:@"cache"] || [key isEqualToString:@"absoluteLink"] || [key isEqualToString:@"overrideLoading"] || [key isEqualToString:@"overrideAlert"] || [key isEqualToString:@"overrideOrder"])
+        {
+            [post removeObjectForKey:key];
+        }
+    }
+    
+    if([self getValue: [dict responseForKey:@"absoluteLink"] ? dict[@"absoluteLink"] : [post bv_jsonStringWithPrettyPrint:NO]])
+    {
+        ((RequestCache)dict[@"cache"])([self getValue:[dict responseForKey:@"absoluteLink"] ? dict[@"absoluteLink"] : [post bv_jsonStringWithPrettyPrint:NO]]);
+    }
+    else
+    {
+        if([dict responseForKey:@"host"])
+        {
+            [dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+        }
+    }
+    if([dict responseForKey:@"overrideLoading"])
+    {
+        if([dict responseForKey:@"host"])
+        {
+            if([[dict getValueFromKey:@"overrideLoading"] isEqualToString:@"1"])
+            {
+                [dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+            }
+        }
+    }
+        
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        if ([dict responseForKey: @"field"]) {
+            for (NSDictionary * field in dict[@"field"]) {
+                [formData appendPartWithFileURL:[NSURL URLWithString:field[@"file"]] name:field[@"key"] fileName:field[@"fileName"] mimeType:@"*/*" error: nil];
+            }
+        }
+        
+        for (NSString * key in [(NSDictionary*)dict[@"data"] allKeys]) {
+            [formData appendPartWithFormData:[dict[@"data"][key] dataUsingEncoding: NSUTF8StringEncoding]
+                                        name:key];
+        }
+
+    } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+      if([responseObject length] == 0)
+      {
+          [self didFailedResult:dict andError:nil andStatusCode:[NSString stringWithFormat:@"%ld",[(NSHTTPURLResponse*)task.response statusCode]]];
+      }
+      else
+      {
+          [self didSuccessResult:dict andResult:[responseObject objectFromJSONData] ? [responseObject objectFromJSONData] : [NSString stringWithUTF8String:[responseObject bytes]] andUrl:url andPostData:post andStatusCode: task.response];
+      }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [self didFailedResult:dict andError:error andStatusCode:[NSString stringWithFormat:@"%ld",[(NSHTTPURLResponse*)operation.response statusCode]]];
+        NSLog(@"%@", [error description]);
+    }];
+}
+
 
 - (void)didInitRequest:(NSMutableDictionary*)dict
 {

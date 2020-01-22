@@ -32,6 +32,8 @@ typedef void (^RequestCache)(NSString * cacheString);
 
 - (void)didInitWithUrl:(NSDictionary*)dict withCache:(RequestCache)cache andCompletion:(RequestCompletion)completion;
 
+- (void)didRequestMultiPart:(NSDictionary*)dict withCache:(RequestCache)cache andCompletion:(RequestCompletion)completion;
+
 - (void)registerPush;
 
 - (void)didReceiveToken:(NSData *)deviceToken;

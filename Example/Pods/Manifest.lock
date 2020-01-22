@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AllPod (0.1.7):
+  - AllPod (0.1.9):
     - AFNetworking (~> 3.1)
     - AVHexColor (~> 2.0)
     - JSONKit-NoWarning (~> 1.2)
@@ -35,7 +35,7 @@ DEPENDENCIES:
   - AllPod (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - AVHexColor
     - JSONKit-NoWarning
@@ -50,7 +50,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AllPod: 635d241a5fcc4bb0606cacdb8e24336b495d0b4a
+  AllPod: 44a7482432b31ce836b19da4ead1801ae419379e
   AVHexColor: 33e5e102f3b6f3acd002779183ee226e21870c28
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -60,4 +60,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 560210847bfbeb5fd3ce51ffb972d57516a8d5a7
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4
