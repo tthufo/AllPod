@@ -201,6 +201,8 @@
 
 - (void)addTapTarget:(id)target action:(SEL)selector;
 
+- (void)addTouchDownTarget:(id)target action:(SEL)selector;
+
 - (void)animation:(CGFloat)duration;
 
 - (void)rotate360WithDuration:(NSArray*)config repeatCount:(float)repeatCount;
@@ -358,13 +360,18 @@
 
 typedef void (^TouchAction)(NSDictionary * touchInfo);
 
+typedef void (^TouchDownAction)(void);
+
 @interface UIView (custom)
 
 @property(nonatomic, copy) TouchAction onTouchEvent;
+
+@property(nonatomic, copy) TouchDownAction onTouchDownEvent;
 
 @property(nonatomic, copy) id object;
 
 - (void)actionForTouch:(id)object and:(TouchAction)touchEvent;
 
+- (void)actionForTouchDown:(id)object and:(TouchDownAction)touchEvent;
 @end
 

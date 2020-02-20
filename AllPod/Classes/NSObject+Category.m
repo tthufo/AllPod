@@ -301,10 +301,10 @@
     {
         case 0:
         {
-            [SVProgressHUD showWithStatus:string];
+            [SVProgressHUD showWithStatus:@""];
             [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-            [SVProgressHUD setBackgroundColor:[UIColor orangeColor]];
-            [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+            [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:255/255 alpha:0]];
+            [SVProgressHUD setForegroundColor:[UIColor greenColor]];
         }
             break;
         case 1:
@@ -989,6 +989,15 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:target action:selector];
             [self addGestureRecognizer:tap];
         }
+    }
+}
+
+- (void)addTouchDownTarget:(id)target action:(SEL)selector
+{
+    if ([self respondsToSelector:@selector(addTarget:action:forControlEvents:)])
+    {
+        [(UIButton *)self removeTarget:target action:selector forControlEvents:UIControlEventTouchDown];
+        [(UIButton *)self addTarget:target action:selector forControlEvents:UIControlEventTouchDown];
     }
 }
 
@@ -1729,7 +1738,7 @@ static NSCharacterSet* VariationSelectors = nil;
 
 @implementation UIView (custom)
 
-@dynamic onTouchEvent, object;
+@dynamic onTouchEvent, object, onTouchDownEvent;
 
 - (void)setObject:(id)object
 {
@@ -1745,10 +1754,24 @@ static NSCharacterSet* VariationSelectors = nil;
     return obj;
 }
 
+- (void)setOnTouchDownEvent:(TouchDownAction)onTouchDownEvent_
+{
+    TouchDownAction onDownTouch = onTouchDownEvent_;
+
+    objc_setAssociatedObject(self, @selector(onTouchDownEvent), onDownTouch, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (TouchDownAction)onTouchDownEvent
+{
+    TouchDownAction onDownTouch = objc_getAssociatedObject(self, @selector(onTouchDownEvent));
+    
+    return onDownTouch;
+}
+
 - (void)setOnTouchEvent:(TouchAction)onTouchEvent_
 {
     TouchAction onTouch = onTouchEvent_;
-    
+
     objc_setAssociatedObject(self, @selector(onTouchEvent), onTouch, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -1768,9 +1791,21 @@ static NSCharacterSet* VariationSelectors = nil;
     [self addTapTarget:self action:@selector(didPressButton:)];
 }
 
+- (void)actionForTouchDown:(id)object and:(TouchDownAction)touchDownEvent
+{
+    self.onTouchDownEvent = touchDownEvent;
+        
+    [self addTouchDownTarget:self action:@selector(didPressDownButton:)];
+}
+
 - (void)didPressButton:(UIButton*)sender
 {
     self.onTouchEvent(self.object);
+}
+
+- (void)didPressDownButton:(UIButton*)sender
+{
+    self.onTouchDownEvent();
 }
 
 @end
