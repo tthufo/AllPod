@@ -23,7 +23,7 @@ static LTRequest *__sharedLTRequest = nil;
 
 @implementation LTRequest
 
-@synthesize deviceToken, address;
+@synthesize deviceToken, address, watcher;
 
 + (LTRequest *)sharedInstance
 {
@@ -126,6 +126,11 @@ static LTRequest *__sharedLTRequest = nil;
     }
     
     self.lang = [dictionary responseForKey:@"lang"];
+}
+
+- (void)initRequestWithWatch:(RequestWatch)watcher {
+    self.watcher = watcher;
+    [self initRequest];
 }
 
 - (void)didInitWithUrl:(NSDictionary*)dict withCache:(RequestCache)cache andCompletion:(RequestCompletion)completion
@@ -554,6 +559,10 @@ static LTRequest *__sharedLTRequest = nil;
     if([info responseForKey:@"eCode"] && !response[info[@"eCode"]])
     {
         [self showToast:@"Check for Plist/eCode" andPos:0];
+    }
+        
+    if (self.watcher) {
+        self.watcher(result);
     }
     
     ((RequestCompletion)dict[@"completion"])([response isKindOfClass:[NSDictionary class]] ? [response bv_jsonStringWithPrettyPrint:NO] : [response isKindOfClass:[NSArray class]] ? [@{@"array":response} bv_jsonStringWithPrettyPrint:NO] : response, [result responseForKey:[info responseForKey:@"eCode"] ? info[@"eCode"] : @"ERR_CODE"] ? [result getValueFromKey:[info responseForKey:@"eCode"] ? info[@"eCode"] : @"ERR_CODE"] : responseCode, nil, [dict responseForKey:@"overrideError"] ? YES : [self didRespond:result andHost:dict[@"host"]], header.allHeaderFields);

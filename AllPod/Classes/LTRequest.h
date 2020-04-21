@@ -11,11 +11,15 @@ typedef void (^RequestCompletion)(NSString * responseString, NSString * errorCod
 
 typedef void (^RequestCache)(NSString * cacheString);
 
+typedef void (^RequestWatch)(NSDictionary * response);
+
 @interface LTRequest : NSObject
 
 @property(nonatomic,copy) RequestCompletion completion;
 
 @property(nonatomic,copy) RequestCache cache;
+
+@property(nonatomic,copy) RequestWatch watcher;
 
 @property (nonatomic, retain) NSString * deviceToken;
 
@@ -27,6 +31,8 @@ typedef void (^RequestCache)(NSString * cacheString);
 + (LTRequest*)sharedInstance;
 
 - (void)initRequest;
+
+- (void)initRequestWithWatch:(RequestWatch)watcher;
 
 - (void)didRequestInfo:(NSDictionary*)dict withCache:(RequestCache)cache andCompletion:(RequestCompletion)completion;
 
