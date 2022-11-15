@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AllPod'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'A short description of AllPod.'
 
 # This description is used to generate tags and improve search results.
@@ -37,7 +37,7 @@ s.public_header_files = 'AllPod/Classes/*.h'
 s.dependency 'SVProgressHUD'
 s.dependency 'Toast', '~> 4.0.0'
 s.dependency 'Reachability', '~> 3.2'
-s.dependency 'AFNetworking', '~> 3.1'
+s.dependency 'AFNetworking', '~> 4'
 s.dependency 'JSONKit-NoWarning', '~> 1.2'
 s.dependency 'SDWebImage', '~> 4.4'
 s.dependency 'AVHexColor', '~> 2.0'
