@@ -15,7 +15,7 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - AllPod (0.2.2):
-    - AFNetworking (~> 4)
+    - AFNetworking (~> 4.0.1)
     - AVHexColor (~> 2.0)
     - JSONKit-NoWarning (~> 1.2)
     - Reachability (~> 3.2)
@@ -50,7 +50,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  AllPod: 818f88d6bb3c1e68fe62f13cf529e6007afdaf1d
+  AllPod: a5cb6829ec825f09a7e8c3012d730e791c21c3f1
   AVHexColor: 33e5e102f3b6f3acd002779183ee226e21870c28
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

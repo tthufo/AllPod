@@ -31,7 +31,7 @@
       "~> 3.2"
     ],
     "AFNetworking": [
-      "~> 4"
+      "~> 4.0.1"
     ],
     "JSONKit-NoWarning": [
       "~> 1.2"
