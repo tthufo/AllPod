@@ -1,6 +1,6 @@
 {
   "name": "AllPod",
-  "version": "0.1.9",
+  "version": "0.2.2",
   "summary": "A short description of AllPod.",
   "description": "All common snippets for personal use",
   "homepage": "https://github.com/tthufo/AllPod",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/tthufo/AllPod.git",
-    "tag": "0.1.9"
+    "tag": "0.2.2"
   },
   "platforms": {
     "ios": "8.0"
@@ -31,7 +31,7 @@
       "~> 3.2"
     ],
     "AFNetworking": [
-      "~> 3.1"
+      "~> 4"
     ],
     "JSONKit-NoWarning": [
       "~> 1.2"
